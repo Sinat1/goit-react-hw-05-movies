@@ -8,18 +8,20 @@ export const Home = () => {
     async function getTrendingMovies() {
       try {
         const { results } = await MovieService.fetchTrendingMovies();
-        setTrendingMovies([...trendingMovies, ...results]);
+        if (results.length > 0) {
+          setTrendingMovies([...trendingMovies, ...results]);
+        }
       } catch (error) {
         console.log(error.message);
       }
     }
-      getTrendingMovies();
-      // eslint-disable-next-line 
+    getTrendingMovies();
+    // eslint-disable-next-line
   }, []);
   return (
     <main>
       <h1>Trending today</h1>
-          <TrendingMoviesList trendingMovies={trendingMovies}></TrendingMoviesList>
+      <TrendingMoviesList trendingMovies={trendingMovies}></TrendingMoviesList>
     </main>
   );
 };

@@ -13,6 +13,6 @@ export const fetchTrendingMovies = async () => {
     `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}&page=1`
   );
 
-  return data.results;
+  return data;
 };
 
