@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { getMovieById } from 'api/getMovieById';
 import { useState, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
@@ -7,6 +7,8 @@ export const MovieDetails = () => {
   const [movieInfo, setMovieInfo] = useState(null);
   const [movieGenres, setMovieGenres] = useState('');
   const { id } = useParams();
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     async function getMovieDetails() {
@@ -26,6 +28,11 @@ export const MovieDetails = () => {
     <>
       {movieInfo && (
         <main>
+          <div>
+            <button type="button">
+              <Link to={backLinkHref}>Go back</Link>
+            </button>
+          </div>
           <img
             src={`https://image.tmdb.org/t/p/w200/${movieInfo.poster_path}`}
             alt={movieInfo.original_title}
