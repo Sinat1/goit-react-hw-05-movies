@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { getMovieById } from 'api/getMovieById';
 import { useState, useEffect } from 'react';
+import { Link, Outlet } from 'react-router-dom';
 
 export const MovieDetails = () => {
   const [movieInfo, setMovieInfo] = useState(null);
@@ -21,7 +22,6 @@ export const MovieDetails = () => {
     getMovieDetails(id);
   }, [id]);
 
-  console.log(movieInfo);
   return (
     <>
       {movieInfo && (
@@ -36,6 +36,18 @@ export const MovieDetails = () => {
           <p>{movieInfo.overview}</p>
           <h5>Genres</h5>
           {movieGenres && <p>{movieGenres}</p>}
+          <div>
+            <h4>Additional information</h4>
+            <ul>
+              <li>
+                <Link to={'cast'}>Cast</Link>
+              </li>
+              <li>
+                <Link to={'reviews'}>Reviews</Link>
+              </li>
+            </ul>
+            <Outlet />
+          </div>
         </main>
       )}
     </>
