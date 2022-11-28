@@ -26,7 +26,7 @@ export const SearchBar = ({ onSubmit }) => {
         value={query}
         onChange={hanldeQueryChange}
       />
-      <button type="button">Search</button>
+      <button type="submit">Search</button>
     </form>
   );
 };
