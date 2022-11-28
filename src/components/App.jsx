@@ -6,6 +6,7 @@ import { Movies } from 'pages/Movies';
 import { NotFound } from 'pages/NotFound';
 import { MovieDetails } from 'pages/MovieDetails';
 import { Cast } from './MovieAdditionalInfo/Cast';
+import { Reviews } from './MovieAdditionalInfo/Reviews';
 
 export const App = () => {
   return (
@@ -27,7 +28,7 @@ export const App = () => {
           <Route path="movies" element={<Movies />} />
           <Route path="movies/:id" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} />
-            {/* <Route path="reviews" element={<Reviews />} /> */}
+            <Route path="reviews" element={<Reviews />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
