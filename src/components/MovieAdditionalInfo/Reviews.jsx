@@ -30,7 +30,7 @@ export const Reviews = () => {
           </li>
         ))
       ) : (
-        <li>We don't have any reviews for this movie.</li>
+        <li>We don't have any reviews for this movie. 😦</li>
       )}
     </ul>
   );

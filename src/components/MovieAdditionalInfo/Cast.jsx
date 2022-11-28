@@ -21,16 +21,20 @@ export const Cast = () => {
 
   return (
     <ul>
-      {castInfo.map(cast => (
-        <li key={cast.id}>
-          <img
-            src={`https://image.tmdb.org/t/p/w200${cast.profile_path}`}
-            alt={cast.original_name}
-          />
-          <h4>{cast.original_name}</h4>
-          Character: {cast.character}
-        </li>
-      ))}
+      {castInfo.length > 0 ? (
+        castInfo.map(cast => (
+          <li key={cast.id}>
+            <img
+              src={`https://image.tmdb.org/t/p/w200${cast.profile_path}`}
+              alt={cast.original_name}
+            />
+            <h4>{cast.original_name}</h4>
+            Character: {cast.character}
+          </li>
+        ))
+      ) : (
+        <li>We don't have any information about this movie's cast. 😢</li>
+      )}
     </ul>
   );
 };
