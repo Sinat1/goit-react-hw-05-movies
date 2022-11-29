@@ -1,19 +1,35 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {
+  StyledTrendingMoviesList,
+  StyledTrendingMovieItem,
+  StyledTrendingMovieImg,
+  StyledTrendingMovieTitle,
+  StyledLink,
+  StyledWrapper,
+} from './TrendingMoviesList.styled';
 
 export const TrendingMoviesList = ({ trendingMovies }) => {
   const location = useLocation();
 
   return (
-    <ul>
+    <StyledTrendingMoviesList>
       {trendingMovies.map(movie => (
-        <li key={movie.id}>
-          <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-            {movie.title}
-          </Link>
-        </li>
+        <StyledTrendingMovieItem key={movie.id}>
+          <StyledLink to={`/movies/${movie.id}`} state={{ from: location }}>
+            <StyledTrendingMovieImg
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <StyledTrendingMovieTitle>{movie.title}</StyledTrendingMovieTitle>
+            <StyledWrapper>
+              <p>Release: {movie.release_date}</p>
+              <p>Rating: {movie.vote_average.toFixed(1)}</p>
+            </StyledWrapper>
+          </StyledLink>
+        </StyledTrendingMovieItem>
       ))}
-    </ul>
+    </StyledTrendingMoviesList>
   );
 };
 

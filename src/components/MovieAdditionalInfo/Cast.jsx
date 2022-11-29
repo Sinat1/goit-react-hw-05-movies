@@ -2,6 +2,12 @@ import { getMovieCredits } from 'api/getMovieCredits';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Notiflix from 'notiflix';
+import {
+  StyledCastList,
+  StyledCastItem,
+  StyledCastErrorItem,
+  StyledCastImg,
+} from './Cast.styled';
 
 const Cast = () => {
   const [castInfo, setCastInfo] = useState([]);
@@ -21,22 +27,24 @@ const Cast = () => {
   }, [id]);
 
   return (
-    <ul>
+    <StyledCastList>
       {castInfo.length > 0 ? (
         castInfo.map(cast => (
-          <li key={cast.id}>
-            <img
+          <StyledCastItem key={cast.id}>
+            <StyledCastImg
               src={`https://image.tmdb.org/t/p/w200${cast.profile_path}`}
               alt={cast.original_name}
             />
             <h4>{cast.original_name}</h4>
             Character: {cast.character}
-          </li>
+          </StyledCastItem>
         ))
       ) : (
-        <li>We don't have any information about this movie's cast. 😢</li>
+        <StyledCastErrorItem>
+          We don't have any information about this movie's cast. 😢
+        </StyledCastErrorItem>
       )}
-    </ul>
+    </StyledCastList>
   );
 };
 
