@@ -2,6 +2,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { getMovieById } from 'api/getMovieById';
 import { useState, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import Notiflix from 'notiflix';
 
 const MovieDetails = () => {
   const [movieInfo, setMovieInfo] = useState(null);
@@ -18,7 +19,7 @@ const MovieDetails = () => {
         setMovieInfo(results);
         setMovieGenres(results.genres.map(genre => genre.name).join(', '));
       } catch (error) {
-        console.log(error);
+        Notiflix.Notify.failure('Failed to get movie info.');
       }
     }
     getMovieDetails(id);

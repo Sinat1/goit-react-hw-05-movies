@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Notiflix from 'notiflix';
 
 const API_KEY = '53d36a46b9069260a6b19b0d73ae2aba';
 
@@ -10,6 +11,6 @@ export const getMovieCredits = async id => {
 
     return data;
   } catch (error) {
-    console.log(error.message);
+    Notiflix.Notify.failure(error.message);
   }
 };

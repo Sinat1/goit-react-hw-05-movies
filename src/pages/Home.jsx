@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as MovieService from 'api/fetchTrendingMovies';
 import { TrendingMoviesList } from 'components/TrendingMovies/TrendingMoviesList';
+import Notiflix from 'notiflix';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -13,7 +14,7 @@ const Home = () => {
           setTrendingMovies([...trendingMovies, ...results]);
         }
       } catch (error) {
-        console.log(error.message);
+        Notiflix.Notify.failure('Failed to load trending movies.');
       }
     }
     getTrendingMovies();

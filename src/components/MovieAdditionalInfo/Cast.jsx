@@ -1,6 +1,7 @@
 import { getMovieCredits } from 'api/getMovieCredits';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Notiflix from 'notiflix';
 
 const Cast = () => {
   const [castInfo, setCastInfo] = useState([]);
@@ -13,7 +14,7 @@ const Cast = () => {
 
         setCastInfo(results.cast);
       } catch (error) {
-        console.log(error);
+        Notiflix.Notify.failure('Failed to load cast');
       }
     }
     getMovieCast(id);

@@ -3,6 +3,7 @@ import { SearchBar } from 'components/SearchBar/SearchBar';
 import { getSearchedMovies } from 'api/getSearchedMovies';
 import { SearchedMoviesList } from 'components/SearchedMoviesList/SearchedMoviesList';
 import { useSearchParams } from 'react-router-dom';
+import Notiflix from 'notiflix';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -19,9 +20,14 @@ const Movies = () => {
         const { results } = await getSearchedMovies(movieTitle);
         if (results.length > 0) {
           setMovies([...movies, ...results]);
+          Notiflix.Notify.success('Hoooray, we found something.');
+        } else {
+          if (results.length === 0) {
+            Notiflix.Notify.failure("We didn't find anything =(");
+          }
         }
       } catch (error) {
-        console.log(error.message);
+        Notiflix.Notify.failure('Failed to load searched Movies.');
       }
     }
     getMovies();

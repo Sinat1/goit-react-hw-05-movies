@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieReviews } from 'api/getMovieReviews';
+import Notiflix from 'notiflix';
 
 const Reviews = () => {
   const [reviewsInfo, setReviewsInfo] = useState([]);
@@ -13,7 +14,7 @@ const Reviews = () => {
 
         setReviewsInfo(results);
       } catch (error) {
-        console.log(error);
+        Notiflix.Notify.failure('Failed to load reviews');
       }
     }
     getReviews(id);

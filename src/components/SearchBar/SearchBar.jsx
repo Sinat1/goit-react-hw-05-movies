@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { ReactComponent as SearchIcon } from '../../icons/searchIcon.svg';
+import Notiflix from 'notiflix';
 
 export const SearchBar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
@@ -11,7 +13,7 @@ export const SearchBar = ({ onSubmit }) => {
   const handleSubmit = event => {
     event.preventDefault();
     if (query.trim() === '') {
-      return alert('Type something in the input');
+      return Notiflix.Notify.warning('Type something in the input');
     }
     onSubmit(query);
     setQuery('');
@@ -27,7 +29,9 @@ export const SearchBar = ({ onSubmit }) => {
         value={query}
         onChange={hanldeQueryChange}
       />
-      <button type="submit">Search</button>
+      <button type="submit">
+        <SearchIcon />
+      </button>
     </form>
   );
 };
