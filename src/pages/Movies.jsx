@@ -2,18 +2,21 @@ import { useState, useEffect } from 'react';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { getSearchedMovies } from 'api/getSearchedMovies';
 import { SearchedMoviesList } from 'components/SearchedMoviesList/SearchedMoviesList';
+import { useSearchParams } from 'react-router-dom';
 
 export const Movies = () => {
-  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
+  const [searchQuery, setSearchQuery] = useSearchParams();
+  const movieTitle = searchQuery.get('query') ?? '';
+
   useEffect(() => {
-    if (!query) {
+    if (movieTitle === '') {
       return;
     }
 
-    async function getMovies(query) {
+    async function getMovies() {
       try {
-        const { results } = await getSearchedMovies(query);
+        const { results } = await getSearchedMovies(movieTitle);
         if (results.length > 0) {
           setMovies([...movies, ...results]);
         }
@@ -21,15 +24,18 @@ export const Movies = () => {
         console.log(error.message);
       }
     }
-    getMovies(query);
+    getMovies();
     // eslint-disable-next-line
-  }, [query]);
+  }, [movieTitle]);
 
   const handleFormSubmit = query => {
-    if (query) {
-      setQuery(query);
-      setMovies([]);
+    if (movieTitle === query) {
+      return;
     }
+
+    const newQuery = query !== '' ? { query } : {};
+    setSearchQuery(newQuery);
+    setMovies([]);
   };
 
   return (
