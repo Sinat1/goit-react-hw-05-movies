@@ -7,6 +7,7 @@ import Notiflix from 'notiflix';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useSearchParams();
   const movieTitle = searchQuery.get('query') ?? '';
 
@@ -16,15 +17,19 @@ const Movies = () => {
     }
 
     async function getMovies() {
+      setIsLoading(true);
       try {
         const { results } = await getSearchedMovies(movieTitle);
         if (results.length > 0) {
           setMovies([...movies, ...results]);
           Notiflix.Notify.success('Hoooray, we found something.');
+          setIsLoading(false);
         } else {
           if (results.length === 0) {
+            setIsLoading(false);
             Notiflix.Notify.failure("We didn't find anything =(");
           }
+          setIsLoading(false);
         }
       } catch (error) {
         Notiflix.Notify.failure('Failed to load searched Movies.');
@@ -47,7 +52,7 @@ const Movies = () => {
   return (
     <main>
       <SearchBar onSubmit={handleFormSubmit} />
-      <SearchedMoviesList movies={movies} />
+      <SearchedMoviesList isLoading={isLoading} movies={movies} />
     </main>
   );
 };
