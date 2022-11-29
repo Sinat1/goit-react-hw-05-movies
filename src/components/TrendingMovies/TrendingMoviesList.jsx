@@ -7,6 +7,7 @@ import {
   StyledTrendingMovieTitle,
   StyledLink,
   StyledWrapper,
+  StyledInfo,
 } from './TrendingMoviesList.styled';
 
 export const TrendingMoviesList = ({ trendingMovies }) => {
@@ -23,8 +24,8 @@ export const TrendingMoviesList = ({ trendingMovies }) => {
             />
             <StyledTrendingMovieTitle>{movie.title}</StyledTrendingMovieTitle>
             <StyledWrapper>
-              <p>Release: {movie.release_date}</p>
-              <p>Rating: {movie.vote_average.toFixed(1)}</p>
+              <StyledInfo>Release: {movie.release_date}</StyledInfo>
+              <StyledInfo>Rating: {movie.vote_average.toFixed(1)}</StyledInfo>
             </StyledWrapper>
           </StyledLink>
         </StyledTrendingMovieItem>

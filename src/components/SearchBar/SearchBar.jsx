@@ -2,6 +2,11 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ReactComponent as SearchIcon } from '../../icons/searchIcon.svg';
 import Notiflix from 'notiflix';
+import {
+  StyledSearchForm,
+  StyledSearchFormBtn,
+  StyledSearchFormInput,
+} from './SearchBar.styled';
 
 export const SearchBar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
@@ -20,8 +25,8 @@ export const SearchBar = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <StyledSearchForm onSubmit={handleSubmit}>
+      <StyledSearchFormInput
         type="text"
         autoComplete="off"
         autoFocus
@@ -29,10 +34,10 @@ export const SearchBar = ({ onSubmit }) => {
         value={query}
         onChange={hanldeQueryChange}
       />
-      <button type="submit">
+      <StyledSearchFormBtn type="submit">
         <SearchIcon />
-      </button>
-    </form>
+      </StyledSearchFormBtn>
+    </StyledSearchForm>
   );
 };
 
