@@ -3,6 +3,8 @@ import { getMovieById } from 'api/getMovieById';
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Notiflix from 'notiflix';
+import { Suspense } from 'react';
+import { Loader } from 'components/Loader/Loader';
 import {
   Wrapper,
   GoBackBtn,
@@ -84,7 +86,9 @@ const MovieDetails = () => {
                 </AdditionalInfoLink>
               </AdditionalInfoItem>
             </AdditionalInfoList>
-            <Outlet />
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
           </AdditionalInfoWrapper>
         </main>
       )}
